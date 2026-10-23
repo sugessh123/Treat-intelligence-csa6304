@@ -1,0 +1,20 @@
+description = input("Enter report description: ").lower()
+audience = input("Enter intended audience: ").lower()
+
+text = description + " " + audience
+
+if any(word in text for word in
+       ["executive", "management", "business risk"]):
+    print("Classification: Strategic")
+
+elif any(word in text for word in
+         ["tactics", "techniques", "procedures", "mitre"]):
+    print("Classification: Tactical")
+
+elif any(word in text for word in
+         ["incident response", "ip address", "malware hash",
+          "live attack", "security analyst"]):
+    print("Classification: Operational")
+
+else:
+    print("Classification: Unclassified")
