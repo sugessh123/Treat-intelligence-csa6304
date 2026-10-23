@@ -1,0 +1,23 @@
+def encrypt(message, key):
+    return bytes(
+        ord(c) ^ ord(key[i % len(key)])
+        for i, c in enumerate(message)
+    )
+
+def decrypt(data, key):
+    return "".join(
+        chr(b ^ ord(key[i % len(key)]))
+        for i, b in enumerate(data)
+    )
+
+message = input("Enter message: ")
+key = input("Enter shared key: ")
+
+if key == "":
+    print("Key cannot be empty")
+else:
+    encrypted = encrypt(message, key)
+
+    print("Original:", message)
+    print("Encrypted:", encrypted.hex())
+    print("Decrypted:", decrypt(encrypted, key))
