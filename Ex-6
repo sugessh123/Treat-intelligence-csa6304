@@ -1,0 +1,33 @@
+from urllib.parse import urlparse
+import ipaddress
+
+url = input("Enter URL: ").strip()
+parsed = urlparse(url if "://" in url else "http://" + url)
+
+domain = parsed.hostname or ""
+suspicious = []
+
+if any(word in url.lower() for word in
+       ["login", "verify", "password", "update"]):
+    suspicious.append("Suspicious keyword")
+
+try:
+    ipaddress.ip_address(domain)
+    suspicious.append("IP address used as domain")
+except ValueError:
+    pass
+
+if len(domain.split(".")) > 4:
+    suspicious.append("Excessive subdomains")
+
+if parsed.scheme != "https":
+    suspicious.append("HTTPS not used")
+
+if suspicious:
+    print("Suspicious URL indicators found:")
+    for item in suspicious:
+        print("-", item)
+else:
+    print("No checked indicators found")
+
+print("This is a basic check, not a definitive verdict.")
