@@ -1,0 +1,15 @@
+policy = {
+    ("Low-Trust", "Public"): True,
+    ("Low-Trust", "Sensitive"): False,
+    ("Admin", "Sensitive"): True,
+    ("Admin", "Public"): True
+}
+
+source = input("Enter source (Low-Trust/Admin): ")
+target = input("Enter target (Public/Sensitive): ")
+
+if policy.get((source, target), False):
+    print("Access GRANTED")
+else:
+    print("Access DENIED")
+    print("Network segmentation blocks access.")
