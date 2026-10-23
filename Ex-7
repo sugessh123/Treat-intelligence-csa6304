@@ -1,0 +1,30 @@
+from collections import Counter
+
+logs = [
+    "INFO User login",
+    "ERROR Database failed",
+    "INFO User login",
+    "WARNING High CPU usage"
+]
+
+# Logstash-style parsing
+events = []
+
+for line in logs:
+    level, message = line.split(" ", 1)
+    events.append({"level": level, "message": message})
+
+print("Parsed Events:")
+for event in events:
+    print(event)
+
+# Elasticsearch-style indexing
+index = {i: event for i, event in enumerate(events)}
+print("\nIndexed Documents:", len(index))
+
+# Kibana-style aggregation
+summary = Counter(event["level"] for event in index.values())
+
+print("\nLog Summary:")
+for level, count in summary.items():
+    print(level, ":", count)
