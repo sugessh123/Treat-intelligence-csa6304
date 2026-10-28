@@ -1,0 +1,17 @@
+activity = input("Enter activity: ").lower()
+
+stages = {
+    "Direction": ["planning", "requirement"],
+    "Collection": ["collect", "gather", "logs"],
+    "Processing": ["clean", "filter", "format"],
+    "Analysis": ["analyze", "investigate"],
+    "Dissemination": ["share", "report"],
+    "Feedback": ["feedback", "improve"]
+}
+
+for stage, words in stages.items():
+    if any(word in activity for word in words):
+        print("Stage:", stage)
+        break
+else:
+    print("Stage not identified")
