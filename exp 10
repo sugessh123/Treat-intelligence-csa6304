@@ -1,0 +1,14 @@
+connections = set()
+
+def firewall(direction, src, dst):
+    if direction == "outbound":
+        connections.add((src, dst))
+        print("Outbound: ALLOWED")
+    elif (dst, src) in connections:
+        print("Return traffic: ALLOWED")
+    else:
+        print("Inbound: BLOCKED")
+
+firewall("outbound", "PC1", "Server1")
+firewall("inbound", "Server1", "PC1")
+firewall("inbound", "Unknown", "PC1")
