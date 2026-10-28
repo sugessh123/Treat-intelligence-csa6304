@@ -1,0 +1,4 @@
+from scapy.all import sniff
+
+print("Capturing 5 packets...")
+sniff(count=5, prn=lambda p: print(p.summary()))
